@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python学霸-软件下载中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .search-container {
+            display: flex;
+            align-items: center;
+            border: 2px solid #d1d5db;
+            border-radius: 9999px;
+            padding: 10px 16px;
+            background: white;
+            margin-bottom: 20px;
+        }
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 16px;
+            color: #333;
+            padding-right: 10px;
+        }
+        .download-item:hover {
+            background: #f3f4f6;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .footer a {
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center text-gray-800 pb-20">
+    <div class="max-w-3xl w-full bg-white rounded-lg p-8 mt-12 shadow-lg">
+        <h1 class="text-4xl font-bold text-center text-gray-900 mb-4">🚀 软件下载中心</h1>
+        <p class="text-center text-gray-500 mb-6">提供各类开发工具的便捷下载</p>
+        
+        <div class="search-container w-full max-w-lg">
+            <input id="search" type="text" placeholder="搜索软件..." class="search-input" onkeyup="filterFiles()">
+            <button onclick="clearSearch()" class="text-gray-500 hover:text-gray-700">✖</button>
+        </div>
+        
+        <ul id="fileList" class="divide-y divide-gray-200 w-full">
+            <!-- 原有工具 -->
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">1</span>
+                    <i class="fas fa-robot text-blue-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">ollama.exe</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-31 | AI 模型运行工具</p>
+                    </div>
+                </div>
+                <a href="https://ollama.com/download" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">2</span>
+                    <i class="fas fa-code text-green-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">VSCode.zip</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-30 | 强大代码编辑器</p>
+                    </div>
+                </div>
+                <a href="https://code.visualstudio.com/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">3</span>
+                    <i class="fab fa-python text-yellow-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">Python3.11.exe</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-29 | 最新 Python 解释器</p>
+                    </div>
+                </div>
+                <a href="https://www.python.org/downloads/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">4</span>
+                    <i class="fas fa-code-branch text-red-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">Git.exe</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-28 | 分布式版本控制系统</p>
+                    </div>
+                </div>
+                <a href="https://git-scm.com/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">5</span>
+                    <i class="fab fa-node-js text-purple-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">NodeJS.msi</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-27 | JavaScript 运行时</p>
+                    </div>
+                </div>
+                <a href="https://nodejs.org/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">6</span>
+                    <i class="fas fa-docker text-teal-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">Docker.exe</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-26 | 容器化平台</p>
+                    </div>
+                </div>
+                <a href="https://www.docker.com/products/docker-desktop" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">7</span>
+                    <i class="fas fa-wrench text-orange-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">Postman.exe</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-25 | API 开发工具</p>
+                    </div>
+                </div>
+                <a href="https://www.postman.com/downloads/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+
+            <!-- 新增工具 -->
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">8</span>
+                    <i class="fab fa-java text-red-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">JDK 21</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-24 | Java 开发工具包</p>
+                    </div>
+                </div>
+                <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">9</span>
+                    <i class="fab fa-js-square text-yellow-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">TypeScript</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-23 | JavaScript 超集</p>
+                    </div>
+                </div>
+                <a href="https://www.typescriptlang.org/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">10</span>
+                    <i class="fab fa-php text-purple-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">PHP 8.3</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-22 | 服务器端脚本语言</p>
+                    </div>
+                </div>
+                <a href="https://www.php.net/downloads.php" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">11</span>
+                    <i class="fab fa-rust text-orange-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">Rust</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-21 | 系统编程语言</p>
+                    </div>
+                </div>
+                <a href="https://www.rust-lang.org/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">12</span>
+                    <i class="fab fa-golang text-blue-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">Go 1.22</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-20 | Go 编程语言</p>
+                    </div>
+                </div>
+                <a href="https://golang.org/dl/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">13</span>
+                    <i class="fab fa-swift text-orange-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">Swift 5.9</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-19 | Apple 编程语言</p>
+                    </div>
+                </div>
+                <a href="https://swift.org/download/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">14</span>
+                    <i class="fab fa-r-project text-blue-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">R 4.3</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-18 | 统计计算语言</p>
+                    </div>
+                </div>
+                <a href="https://www.r-project.org/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">15</span>
+                    <i class="fab fa-linux text-black w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">Ubuntu 24.04</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-17 | Linux 发行版</p>
+                    </div>
+                </div>
+                <a href="https://ubuntu.com/download" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">16</span>
+                    <i class="fab fa-windows text-blue-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">Windows 11</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-16 | 操作系统</p>
+                    </div>
+                </div>
+                <a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+            <li class="download-item p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">17</span>
+                    <i class="fab fa-apple text-gray-500 w-8 h-8"></i>
+                    <div>
+                        <span class="font-semibold">macOS Sonoma</span>
+                        <p class="text-xs text-gray-500">更新: 2025-01-15 | 操作系统</p>
+                    </div>
+                </div>
+                <a href="https://www.apple.com/macos/" target="_blank" class="text-blue-500 hover:underline">官网下载</a>
+            </li>
+        </ul>
+    </div>
+    
+    <footer class="footer">
+        © 2025 软件中心 | 由 <a href="#" class="text-blue-500 hover:underline">开发者社区</a> 提供支持
+    </footer>
+
+    <script>
+        function filterFiles() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let items = document.querySelectorAll("#fileList li");
+            let visibleCount = 0;
+            items.forEach(item => {
+                let text = item.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    item.style.display = "flex";
+                    visibleCount++;
+                    item.querySelector("span.text-gray-500").innerText = visibleCount;
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+        
+        function clearSearch() {
+            document.getElementById("search").value = "";
+            filterFiles();
+        }
+    </script>
+</body>
+</html>
