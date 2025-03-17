@@ -969,8 +969,6 @@
             const loadingDiv = addLoadingMessage();
 
             try {
-                // ------------------------ IMPORTANT CHANGE ------------------------
-                // Changed API endpoint URL to the PythonAnywhere backend
                 const response = await fetch('https://geepseek.pythonanywhere.com/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -981,8 +979,6 @@
                         images: imagesToSend
                     })
                 });
-                // ------------------------ IMPORTANT CHANGE ------------------------
-
 
                 if (!response.ok) throw new Error(`服务器错误: ${response.status} - ${await response.text()}`);
 
